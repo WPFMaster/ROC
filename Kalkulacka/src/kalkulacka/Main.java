@@ -6,6 +6,7 @@
 package kalkulacka;
 
 /**
+ * https://kisk.phil.muni.cz/kpi/temata/tvorba-a-sdelovani-novych-informaci/tvorba-posteru
  *
  * @author dominik.dembinny.s
  */
