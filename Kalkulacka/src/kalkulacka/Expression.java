@@ -15,23 +15,25 @@ public class Expression {
     public final Solver solve;
 
     public Expression(String input) {
-        input = input.replaceAll(" +", "");     // " +" is regex expresion standing for take as mutch spaces as can
+        input = input.replaceAll(" +", "");     // " +" is regex expresion standing for: take as mutch spaces as can
         String[] sides = input.split("=", 3);   // Liited with 3 because IDK
         if (sides.length > 2) {
-            System.out.println("Zadaná výraz má příliš mnoho znaků '='.");
+            System.out.println("Zadaný výraz má příliš mnoho znaků '='.");
             solve = null;
             return;
         }
         if (sides.length == 1 || sides[1].trim().length() == 0) {
             //Problem to solve
-            solve = new Problem();
+            solve = new Problem(Parser(sides[0]), sides[0] + "=");
         }
         else {
             //Equation to solve
-            solve = new Equation();
+            solve = new Equation(new String[][] {Parser(sides[0]), Parser(sides[1])}, input);
         }
     }
     
-    public static void Parser(String input) {
+    public static String[] Parser(String input) {
+        String suportedOperations = "\\+\\-*/^()";
+        return input.split("(?=[" + suportedOperations + "])");  //Uses positive lookahead to keep spliting characters
     }
 }
