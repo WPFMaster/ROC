@@ -16,8 +16,8 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Expression ex = new Expression("10-5=");
-        System.out.println(ex.solve.getExpression());
+        Expression ex = new Expression("2*(-10-5)=");
+        System.out.println(ex.solve.solve());
     }
     
 }
