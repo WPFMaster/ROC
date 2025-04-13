@@ -16,9 +16,9 @@ public class Expression {
 
     public Expression(String input) {
         input = input.replaceAll(" +", "");     // " +" is regex expresion standing for: take as mutch spaces as can
-        String[] sides = input.split("=", 3);   // Liited with 3 because IDK
+        String[] sides = input.split("=", 3);   // Limited with 3 because IDK
         if (sides.length > 2) {
-            System.out.println("Zadaný výraz má příliš mnoho znaků '='.");
+            System.out.println("Zadaný výraz má příliš mnoho znaků '='!!!");
             solve = null;
             return;
         }

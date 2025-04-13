@@ -5,6 +5,9 @@
  */
 package kalkulacka;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * https://kisk.phil.muni.cz/kpi/temata/tvorba-a-sdelovani-novych-informaci/tvorba-posteru
  *
@@ -18,6 +21,16 @@ public class Main {
     public static void main(String[] args) {
         Expression ex = new Expression("2*(-10-5)=");
         System.out.println(ex.solve.solve());
+        List<Integer> list = new ArrayList();
+        list.add(null);
+        list.add(null);
+        list.add(null);
+        System.out.println(list);
+        System.out.println(Double.parseDouble("-"));
+        
+    }
+    public static void ahoj(Integer a) {
+        a++;
     }
     
 }
