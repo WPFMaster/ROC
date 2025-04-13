@@ -63,7 +63,7 @@ public class Problem implements Solver {
                     oup.addAll(lowPriority);
                     
                     if (Segments[i.get()].length() > 1) {
-                        lowPriority.add((list) -> list.push(list.pop() + list.pop()));
+                        lowPriority.add(new SegmentAdd());
                     } else lowPriority.add((list) -> list.push(- list.pop() + list.pop()));
                     break;
                 case '+':
@@ -71,13 +71,13 @@ public class Problem implements Solver {
                     oup.addAll(midPriority);
                     oup.addAll(lowPriority);
                     
-                    lowPriority.add((list) -> list.push(list.pop() + list.pop()));
+                    lowPriority.add(new SegmentAdd());
                     break;
                 case '*':
                     oup.addAll(highPriority);
                     oup.addAll(midPriority);
                     
-                    midPriority.add((list) -> list.push(list.pop() * list.pop()));
+                    midPriority.add(new SegmentMulti());
                     break;
                 case '/':
                     oup.addAll(highPriority);
