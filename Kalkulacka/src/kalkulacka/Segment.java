@@ -8,7 +8,7 @@ import java.util.Stack;
 
 /**
  *
- * @author dembi
+ * @author dominik.dembinny.s
  */
 public interface Segment {
     public void run(Stack<Double> list);

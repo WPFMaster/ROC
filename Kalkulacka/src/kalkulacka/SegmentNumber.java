@@ -8,7 +8,7 @@ import java.util.Stack;
 
 /**
  *
- * @author dembi
+ * @author dominik.dembinny.s
  */
 public class SegmentNumber implements Segment {
     private final double a;
