@@ -37,6 +37,9 @@ public class Problem implements Solver {
     
     private List<Segment> Simplify() {
         List<Segment> oup = new ArrayList();
+        if (Segments[0].charAt(0) == '-') {
+            oup.add(new SegmentNumber(0));
+        }
         recursiveSimplification(oup, new AtomicInteger(), 0);
         
         return oup;
@@ -48,7 +51,7 @@ public class Problem implements Solver {
             System.out.println("Rovnice je příliš vnořená!!! 01");
             return false;
         }
-        if (Segments[i.get()].charAt(0) == '-') oup.add(new SegmentNumber(0));
+        //if (Segments[i.get()].charAt(0) == '-') oup.add(new SegmentNumber(0));
         
         List<Segment> lowPriority = new ArrayList();    //+ -
         List<Segment> midPriority = new ArrayList();    //* /
@@ -133,6 +136,8 @@ public class Problem implements Solver {
                     if (Segments[i.get()].length() > 1) {
                         oup.add(new SegmentNumber(parseRest(Segments[i.get()].substring(1))));
                         numberOfElements++;
+                    } else if (Segments[i.get() + 1].charAt(0) == '-') {
+                        oup.add(new SegmentNumber(0));
                     }
                     
                     i.incrementAndGet();
