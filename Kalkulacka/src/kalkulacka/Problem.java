@@ -56,11 +56,15 @@ public class Problem implements Solver {
         //Every operation adds to it's own priority level and pushes other higher priority operations
         
         for (; i.get() < Segments.length; i.getAndIncrement()) {
+            String a = Segments[i.get()];
             switch (Segments[i.get()].charAt(0)) {
                 case '-':
                     oup.addAll(highPriority);
+                    highPriority.clear();
                     oup.addAll(midPriority);
+                    midPriority.clear();
                     oup.addAll(lowPriority);
+                    lowPriority.clear();
                     
                     if (Segments[i.get()].length() > 1) {
                         lowPriority.add(new SegmentAdd());
@@ -68,25 +72,33 @@ public class Problem implements Solver {
                     break;
                 case '+':
                     oup.addAll(highPriority);
+                    highPriority.clear();
                     oup.addAll(midPriority);
+                    midPriority.clear();
                     oup.addAll(lowPriority);
+                    lowPriority.clear();
                     
                     lowPriority.add(new SegmentAdd());
                     break;
                 case '*':
                     oup.addAll(highPriority);
+                    highPriority.clear();
                     oup.addAll(midPriority);
+                    midPriority.clear();
                     
                     midPriority.add(new SegmentMulti());
                     break;
                 case '/':
                     oup.addAll(highPriority);
+                    highPriority.clear();
                     oup.addAll(midPriority);
+                    midPriority.clear();
                     
                     midPriority.add((list) -> list.push(1 / list.pop() * list.pop()));
                     break;
                 case '^':
                     oup.addAll(highPriority);
+                    highPriority.clear();
                     
                     highPriority.add((list) -> {
                         double e = list.pop();
@@ -97,6 +109,14 @@ public class Problem implements Solver {
                     i.incrementAndGet();
                     recursiveSimplification(oup, i, n + 1);
                     
+                    //When it returns the braclet is already closed
+                    oup.addAll(highPriority);
+                    highPriority.clear();
+                    oup.addAll(midPriority);
+                    midPriority.clear();
+                    oup.addAll(lowPriority);
+                    lowPriority.clear();
+                    
                     break;
                 case ')':
                     if (Segments[i.get()].length() > 1) { //Immediately after end-braclet is number or other inparseble character
@@ -105,8 +125,11 @@ public class Problem implements Solver {
                     }
                     
                     oup.addAll(highPriority);
+                    highPriority.clear();
                     oup.addAll(midPriority);
+                    midPriority.clear();
                     oup.addAll(lowPriority);
+                    lowPriority.clear();
                     
                     return true;
                 case '.'://   - length is grader than 1 and can by handled by parseRest
