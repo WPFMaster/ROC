@@ -177,6 +177,13 @@ public class Problem implements Solver {
                     }
             }
         }
+        
+        oup.addAll(highPriority);
+        highPriority.clear();
+        oup.addAll(midPriority);
+        midPriority.clear();
+        oup.addAll(lowPriority);
+        lowPriority.clear();
         return true;
     }
     
