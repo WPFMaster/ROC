@@ -59,43 +59,91 @@ public class Problem implements Solver {
             switch (Segments[i.get()].charAt(0)) {
                 case '-':
                     oup.addAll(highPriority);
+                    highPriority.clear();
                     oup.addAll(midPriority);
+                    midPriority.clear();
                     oup.addAll(lowPriority);
+                    lowPriority.clear();
                     
                     if (Segments[i.get()].length() > 1) {
                         lowPriority.add((list) -> list.push(list.pop() + list.pop()));
+                        //After operator is number located
+                        oup.add(new SegmentNumber(parseRest(Segments[i.get()])));
+                        numberOfElements++;
                     } else lowPriority.add((list) -> list.push(- list.pop() + list.pop()));
                     break;
                 case '+':
                     oup.addAll(highPriority);
+                    highPriority.clear();
                     oup.addAll(midPriority);
+                    midPriority.clear();
                     oup.addAll(lowPriority);
+                    lowPriority.clear();
                     
                     lowPriority.add((list) -> list.push(list.pop() + list.pop()));
+            
+            
+                    if (Segments[i.get()].length() > 1) {
+                        oup.add(new SegmentNumber(parseRest(Segments[i.get()])));
+                        numberOfElements++;
+                    }
                     break;
                 case '*':
                     oup.addAll(highPriority);
+                    highPriority.clear();
                     oup.addAll(midPriority);
+                    midPriority.clear();
                     
                     midPriority.add((list) -> list.push(list.pop() * list.pop()));
+                    
+                    if (Segments[i.get()].length() > 1) {
+                        oup.add(new SegmentNumber(parseRest(Segments[i.get()].substring(1))));
+                        numberOfElements++;
+                    }
                     break;
                 case '/':
                     oup.addAll(highPriority);
+                    highPriority.clear();
                     oup.addAll(midPriority);
+                    midPriority.clear();
                     
                     midPriority.add((list) -> list.push(1 / list.pop() * list.pop()));
+                    
+                    if (Segments[i.get()].length() > 1) {
+                        oup.add(new SegmentNumber(parseRest(Segments[i.get()].substring(1))));
+                        numberOfElements++;
+                    }
                     break;
                 case '^':
                     oup.addAll(highPriority);
+                    highPriority.clear();
                     
                     highPriority.add((list) -> {
                         double e = list.pop();
                         list.push(Math.pow(list.pop(), e));
                             });
+                    
+                    if (Segments[i.get()].length() > 1) {
+                        oup.add(new SegmentNumber(parseRest(Segments[i.get()].substring(1))));
+                        numberOfElements++;
+                    }
                     break;
                 case '(':
+                    if (Segments[i.get()].length() > 1) {
+                        oup.add(new SegmentNumber(parseRest(Segments[i.get()].substring(1))));
+                        numberOfElements++;
+                    }
+                    
                     i.incrementAndGet();
                     recursiveSimplification(oup, i, n + 1);
+                    
+                    //When recursiveSimplification() returns the braclet is already closed, so operators can be flushed
+                    oup.addAll(highPriority);
+                    highPriority.clear();
+                    oup.addAll(midPriority);
+                    midPriority.clear();
+                    oup.addAll(lowPriority);
+                    lowPriority.clear();
                     
                     break;
                 case ')':
@@ -111,23 +159,22 @@ public class Problem implements Solver {
                     return true;
                 case '.'://   - length is grader than 1 and can by handled by parseRest
                 case ','://   - The same applies
+                    if (Segments[i.get()].length() > 1) {
+                        oup.add(new SegmentNumber(parseRest(Segments[i.get()].substring(1))));
+                        numberOfElements++;
+                    } else {
+                        System.out.println("Chyba při zadávání rovnice!!! 02.1");
+                    }
                     break;
                     
                 default:
-                    if (Character.isDigit(Segments[i.get()].charAt(0)) && Segments[i.get()].length() == 1) {
+                    if (Character.isDigit(Segments[i.get()].charAt(0))) {
                         oup.add(new SegmentNumber(parseRest(Segments[i.get()])));
                         numberOfElements++;
-                    } else if (Character.isDigit(Segments[i.get()].charAt(0))) {
+                    } else {
                         System.out.println("Chyba při zadávání příkladu!!! 03");
                         return false;
                     }
-            }
-            
-            
-            if (Segments[i.get()].length() > 1) {
-                //After operator is number located
-                oup.add(new SegmentNumber(parseRest(Segments[i.get()])));
-                numberOfElements++;
             }
         }
         return true;

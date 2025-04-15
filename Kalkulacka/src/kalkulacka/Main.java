@@ -19,14 +19,13 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Expression ex = new Expression("2*(-10-5)=");
+        Expression ex = new Expression("2*10-5=");
         System.out.println(ex.solve.solve());
         List<Integer> list = new ArrayList();
         list.add(null);
         list.add(null);
         list.add(null);
         System.out.println(list);
-        System.out.println(Double.parseDouble("-"));
         
     }
     public static void ahoj(Integer a) {
