@@ -19,7 +19,8 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Expression ex = new Expression("2*10-5=");
+        Expression ex = new Expression("(2*3 + 3*4 + 4*5) / (10 - 5)");
+        System.out.println(ex.solve.getExpression());
         System.out.println(ex.solve.solve());
         List<Integer> list = new ArrayList();
         list.add(null);

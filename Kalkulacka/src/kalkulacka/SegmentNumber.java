@@ -21,4 +21,9 @@ public class SegmentNumber implements Segment {
     public void run(Stack<Double> list) {
         list.add(a);
     }
+
+    @Override
+    public String toString() {
+        return a + "";
+    }
 }

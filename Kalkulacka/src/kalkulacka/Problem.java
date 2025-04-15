@@ -28,6 +28,7 @@ public class Problem implements Solver {
     public double solve() {
         List<Segment> arr = Simplify();
         Stack<Double> oup = new Stack();
+        System.out.println(arr);
         for (Segment a : arr) {
             a.run(oup);
         }
