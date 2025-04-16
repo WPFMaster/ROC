@@ -34,6 +34,6 @@ public class Expression {
     
     public static String[] Parser(String input) {
         String suportedOperations = "\\+\\-*/^()";
-        return input.split("(?=[" + suportedOperations + "])");  //Uses positive lookahead to keep spliting characters
+        return input.split("(?=[" + suportedOperations + "])|(?<=[" + suportedOperations + "])");  //Uses positive lookahead to keep spliting characters
     }
 }

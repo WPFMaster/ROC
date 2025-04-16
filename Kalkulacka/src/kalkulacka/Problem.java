@@ -5,7 +5,8 @@
 package kalkulacka;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -27,7 +28,7 @@ public class Problem implements Solver {
     @Override
     public double solve() {
         List<Segment> arr = Simplify();
-        Stack<Double> oup = new Stack();
+        Deque<Double> oup = new LinkedList<>();
         System.out.println(arr);
         for (Segment a : arr) {
             a.run(oup);
@@ -60,8 +61,12 @@ public class Problem implements Solver {
         //Every operation adds to it's own priority level and pushes other higher priority operations
         
         for (; i.get() < Segments.length; i.getAndIncrement()) {
-            switch (Segments[i.get()].charAt(0)) {
-                case '-':
+            String item = Segments[i.get()];
+            if (item.length() == 0) {
+                continue;
+            }
+            switch (item) {
+                case "-":
                     oup.addAll(highPriority);
                     highPriority.clear();
                     oup.addAll(midPriority);
@@ -69,14 +74,20 @@ public class Problem implements Solver {
                     oup.addAll(lowPriority);
                     lowPriority.clear();
                     
-                    if (Segments[i.get()].length() > 1) {
-                        lowPriority.add((list) -> list.push(list.pop() + list.pop()));
-                        //After operator is number located
-                        oup.add(new SegmentNumber(parseRest(Segments[i.get()])));
-                        numberOfElements++;
+                    //Need to solve minus after pranthesies and in the beginning of expression
+                    if (i.get() == 0 || Segments[i.get() - 1] == "(") {
+                        
                     } else lowPriority.add((list) -> list.push(- list.pop() + list.pop()));
+                    
+                    
+//                    if (Segments[i.get()].length() > 1) {
+//                        lowPriority.add((list) -> list.push(list.pop() + list.pop()));
+//                        //After operator is number located
+//                        oup.add(new SegmentNumber(parseRest(Segments[i.get()])));
+//                        numberOfElements++;
+//                    } else lowPriority.add((list) -> list.push(- list.pop() + list.pop()));
                     break;
-                case '+':
+                case "+":
                     oup.addAll(highPriority);
                     highPriority.clear();
                     oup.addAll(midPriority);
@@ -85,40 +96,25 @@ public class Problem implements Solver {
                     lowPriority.clear();
                     
                     lowPriority.add((list) -> list.push(list.pop() + list.pop()));
-            
-            
-                    if (Segments[i.get()].length() > 1) {
-                        oup.add(new SegmentNumber(parseRest(Segments[i.get()])));
-                        numberOfElements++;
-                    }
                     break;
-                case '*':
+                case "*":
                     oup.addAll(highPriority);
                     highPriority.clear();
                     oup.addAll(midPriority);
                     midPriority.clear();
                     
                     midPriority.add((list) -> list.push(list.pop() * list.pop()));
-                    
-                    if (Segments[i.get()].length() > 1) {
-                        oup.add(new SegmentNumber(parseRest(Segments[i.get()].substring(1))));
-                        numberOfElements++;
-                    }
                     break;
-                case '/':
+                case "/":
                     oup.addAll(highPriority);
                     highPriority.clear();
                     oup.addAll(midPriority);
                     midPriority.clear();
                     
+                    //Not conventional. Need FIX!!!
                     midPriority.add((list) -> list.push(1 / list.pop() * list.pop()));
-                    
-                    if (Segments[i.get()].length() > 1) {
-                        oup.add(new SegmentNumber(parseRest(Segments[i.get()].substring(1))));
-                        numberOfElements++;
-                    }
                     break;
-                case '^':
+                case "^":
                     oup.addAll(highPriority);
                     highPriority.clear();
                     
@@ -126,20 +122,8 @@ public class Problem implements Solver {
                         double e = list.pop();
                         list.push(Math.pow(list.pop(), e));
                             });
-                    
-                    if (Segments[i.get()].length() > 1) {
-                        oup.add(new SegmentNumber(parseRest(Segments[i.get()].substring(1))));
-                        numberOfElements++;
-                    }
                     break;
-                case '(':
-                    if (Segments[i.get()].length() > 1) {
-                        oup.add(new SegmentNumber(parseRest(Segments[i.get()].substring(1))));
-                        numberOfElements++;
-                    } else if (Segments[i.get() + 1].charAt(0) == '-') {
-                        oup.add(new SegmentNumber(0));
-                    }
-                    
+                case "(":
                     i.incrementAndGet();
                     recursiveSimplification(oup, i, n + 1);
                     
@@ -152,7 +136,7 @@ public class Problem implements Solver {
                     lowPriority.clear();
                     
                     break;
-                case ')':
+                case ")":
                     if (Segments[i.get()].length() > 1) { //Immediately after end-braclet is number or other inparseble character
                         System.out.println("Chyba při zadávání příkladu!!! 02");
                         return false;
@@ -163,8 +147,8 @@ public class Problem implements Solver {
                     oup.addAll(lowPriority);
                     
                     return true;
-                case '.'://   - length is grader than 1 and can by handled by parseRest
-                case ','://   - The same applies
+                case "."://   - length is grader than 1 and can by handled by parseRest
+                case ","://   - The same applies
                     if (Segments[i.get()].length() > 1) {
                         oup.add(new SegmentNumber(parseRest(Segments[i.get()].substring(1))));
                         numberOfElements++;

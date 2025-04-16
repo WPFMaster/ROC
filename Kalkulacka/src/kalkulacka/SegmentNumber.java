@@ -4,6 +4,7 @@
  */
 package kalkulacka;
 
+import java.util.Deque;
 import java.util.Stack;
 
 /**
@@ -18,7 +19,7 @@ public class SegmentNumber implements Segment {
     }
     
     @Override
-    public void run(Stack<Double> list) {
+    public void run(Deque<Double> list) {
         list.add(a);
     }
 

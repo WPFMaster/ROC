@@ -4,6 +4,7 @@
  */
 package kalkulacka;
 
+import java.util.Deque;
 import java.util.Stack;
 
 /**
@@ -11,7 +12,7 @@ import java.util.Stack;
  * @author dominik.dembinny.s
  */
 public interface Segment {
-    public void run(Stack<Double> list);
+    public void run(Deque<Double> list);
 
     @Override
     public String toString();
