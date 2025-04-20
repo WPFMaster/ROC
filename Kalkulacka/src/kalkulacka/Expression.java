@@ -5,7 +5,8 @@
  */
 package kalkulacka;
 
-import java.util.function.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -32,8 +33,15 @@ public class Expression {
         }
     }
     
-    public static String[] Parser(String input) {
+    public static List<String> Parser(String input) {
         String suportedOperations = "\\+\\-*/^()";
-        return input.split("(?=[" + suportedOperations + "])|(?<=[" + suportedOperations + "])");  //Uses positive lookahead to keep spliting characters
+        String[] segments = input.split("(?=[" + suportedOperations + "])|(?<=[" + suportedOperations + "])");  //Uses positive lookahead to keep spliting characters
+        List<String> segmentsNoNull = new ArrayList(segments.length);
+        for (String segment : segments) {
+            if (segment != "") {
+                segmentsNoNull.add(segment);
+            }
+        }
+        return segmentsNoNull;
     }
 }

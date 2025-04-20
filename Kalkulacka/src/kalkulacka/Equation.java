@@ -5,6 +5,8 @@
  */
 package kalkulacka;
 
+import java.util.List;
+
 /**
  *
  * @author dominik.dembinny.s
@@ -13,9 +15,9 @@ public class Equation implements Solver {
     private final String StringRepresentation;
     //Seghmets[0] = Right Side of Equation
     //Segments[1] = Left side of Equation
-    private final String[][] Segments;
+    private final List<String>[] Segments;
 
-    public Equation(String[][] seg, String StrRepre) {
+    public Equation(List<String>[] seg, String StrRepre) {
         StringRepresentation = StrRepre;
         Segments = seg;
     }

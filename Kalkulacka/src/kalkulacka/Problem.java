@@ -17,10 +17,10 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class Problem implements Solver {
     private final String StringRepresentation;
-    private final String[] Segments;
+    private final List<String> Segments;
     private int numberOfElements;
     
-    public Problem(String[] seg, String StrRepre) {
+    public Problem(List<String> seg, String StrRepre) {
         StringRepresentation = StrRepre;
         Segments = seg;
     }
@@ -38,9 +38,6 @@ public class Problem implements Solver {
     
     private List<Segment> Simplify() {
         List<Segment> oup = new ArrayList();
-        if (Segments[0].charAt(0) == '-') {
-            oup.add(new SegmentNumber(0));
-        }
         recursiveSimplification(oup, new AtomicInteger(), 0);
         
         return oup;
@@ -60,8 +57,8 @@ public class Problem implements Solver {
         
         //Every operation adds to it's own priority level and pushes other higher priority operations
         
-        for (; i.get() < Segments.length; i.getAndIncrement()) {
-            String item = Segments[i.get()];
+        for (; i.get() < Segments.size(); i.getAndIncrement()) {
+            String item = Segments.get(i.get());
             if (item.length() == 0) {
                 continue;
             }
@@ -75,7 +72,7 @@ public class Problem implements Solver {
                     lowPriority.clear();
                     
                     //Need to solve minus after pranthesies and in the beginning of expression
-                    if (i.get() == 0 || Segments[i.get() - 1] == "(") {
+                    if (i.get() == 0 || Segments.get(i.get() - 1) == "(") {
                         
                     } else lowPriority.add((list) -> list.push(- list.pop() + list.pop()));
                     
@@ -136,12 +133,7 @@ public class Problem implements Solver {
                     lowPriority.clear();
                     
                     break;
-                case ")":
-                    if (Segments[i.get()].length() > 1) { //Immediately after end-braclet is number or other inparseble character
-                        System.out.println("Chyba při zadávání příkladu!!! 02");
-                        return false;
-                    }
-                    
+                case ")":                    
                     oup.addAll(highPriority);
                     oup.addAll(midPriority);
                     oup.addAll(lowPriority);
@@ -149,8 +141,8 @@ public class Problem implements Solver {
                     return true;
                 case "."://   - length is grader than 1 and can by handled by parseRest
                 case ","://   - The same applies
-                    if (Segments[i.get()].length() > 1) {
-                        oup.add(new SegmentNumber(parseRest(Segments[i.get()].substring(1))));
+                    if (Segments.get(i.get()).length() > 1) {
+                        oup.add(new SegmentNumber(parseRest(item)));
                         numberOfElements++;
                     } else {
                         System.out.println("Chyba při zadávání rovnice!!! 02.1");
@@ -158,8 +150,8 @@ public class Problem implements Solver {
                     break;
                     
                 default:
-                    if (Character.isDigit(Segments[i.get()].charAt(0))) {
-                        oup.add(new SegmentNumber(parseRest(Segments[i.get()])));
+                    if (Character.isDigit(item.charAt(0))) {
+                        oup.add(new SegmentNumber(parseRest(item)));
                         numberOfElements++;
                     } else {
                         System.out.println("Chyba při zadávání příkladu!!! 03");
