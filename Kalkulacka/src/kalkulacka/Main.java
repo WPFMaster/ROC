@@ -20,14 +20,9 @@ public class Main {
      */
     public static void main(String[] args) {
         Expression ex = new Expression(".3-.09^.5");
+        System.out.println(((Problem)ex.solve).getSiplifyNotation());
         System.out.println(ex.solve.getExpression());
         System.out.println(ex.solve.solve());
-        List<Integer> list = new ArrayList();
-        list.add(null);
-        list.add(null);
-        list.add(null);
-        System.out.println(list);
-        
     }
     public static void ahoj(Integer a) {
         a++;

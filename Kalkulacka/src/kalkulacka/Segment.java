@@ -14,6 +14,8 @@ import java.util.Stack;
 public interface Segment {
     public void run(Deque<Double> list);
 
+    public String getExactRepresentation();
+
     @Override
     public String toString();
 }

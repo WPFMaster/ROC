@@ -37,13 +37,13 @@ public class Expression {
     public static List<String> Parser(String input) {
         String suportedOperations = "\\+\\-*/^()";
         String[] segments = input.split("(?=[" + suportedOperations + "])|(?<=[" + suportedOperations + "])");  //Uses positive lookahead to keep spliting characters
-        List<String> segmentsNoNull = new ArrayList(segments.length);
+        List<String> segmentsNoEmpty = new ArrayList(segments.length);
         for (String segment : segments) {
             if (segment != "") {
-                segmentsNoNull.add(segment);
+                segmentsNoEmpty.add(segment);
             }
         }
-        System.out.println(segmentsNoNull);
-        return segmentsNoNull;
+        System.out.println(segmentsNoEmpty);
+        return segmentsNoEmpty;
     }
 }

@@ -2,29 +2,29 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package kalkulacka;
+package kalkulacka.SegmentTypes;
 
 import java.util.Deque;
-import java.util.Stack;
+import kalkulacka.Segment;
 
 /**
  *
- * @author dominik.dembinny.s
+ * @author Admin
  */
-public class SegmentNumber implements Segment {
-    private final double a;
+public class SegmentMultiply implements Segment {
 
-    public SegmentNumber(double a) {
-        this.a = a;
-    }
-    
     @Override
     public void run(Deque<Double> list) {
-        list.push(a);
+        list.push(list.pop() * list.pop());
+    }
+
+    @Override
+    public String getExactRepresentation() {
+        return "*";
     }
 
     @Override
     public String toString() {
-        return a + "";
+        return "SegmentMultiply";
     }
 }

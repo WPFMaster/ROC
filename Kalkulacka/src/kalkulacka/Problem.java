@@ -4,12 +4,13 @@
  */
 package kalkulacka;
 
+import kalkulacka.SegmentTypes.SegmentNumber;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Stack;
 import java.util.concurrent.atomic.AtomicInteger;
+import kalkulacka.SegmentTypes.*;
 
 /**
  *
@@ -29,7 +30,6 @@ public class Problem implements Solver {
     public double solve() {
         List<Segment> arr = Simplify();
         Deque<Double> oup = new LinkedList<>();
-        System.out.println(arr);
         for (Segment a : arr) {
             a.run(oup);
         }
@@ -75,8 +75,8 @@ public class Problem implements Solver {
                     
                     //Need to solve minus after pranthesies and in the beginning of expression
                     if (i.get() == 0 || "(".equals(Segments.get(i.get() - 1))) {
-                        negation.add((list) -> list.push(- list.pop()));
-                    } else lowPriority.add((list) -> list.push(- list.pop() + list.pop()));
+                        negation.add(new SegmentNegation());
+                    } else lowPriority.add(new SegmentSubtract());
                     
                     
 //                    if (Segments[i.get()].length() > 1) {
@@ -94,7 +94,7 @@ public class Problem implements Solver {
                     oup.addAll(lowPriority);
                     lowPriority.clear();
                     
-                    lowPriority.add((list) -> list.push(list.pop() + list.pop()));
+                    lowPriority.add(new SegmentAdd());
                     break;
                 case "*":
                     oup.addAll(highPriority);
@@ -102,7 +102,7 @@ public class Problem implements Solver {
                     oup.addAll(midPriority);
                     midPriority.clear();
                     
-                    midPriority.add((list) -> list.push(list.pop() * list.pop()));
+                    midPriority.add(new SegmentMultiply());
                     break;
                 case "/":
                     oup.addAll(highPriority);
@@ -111,21 +111,15 @@ public class Problem implements Solver {
                     midPriority.clear();
                     
                     
-                    midPriority.add((list) -> {
-                        Double e = list.pop();
-                        list.push(list.pop() / e);
-            });
+                    midPriority.add(new SegmentDivide());
                     break;
                 case "^":
                     oup.addAll(highPriority);
                     highPriority.clear();
                     
-                    highPriority.add((list) -> {
-                        double e = list.pop();
-                        list.push(Math.pow(list.pop(), e));
-                            });
+                    highPriority.add(new SegmentPower());
                     break;
-                case "(":
+                case "(": //Need to solve when there is number before braclet
                     i.incrementAndGet();
                     recursiveSimplification(oup, i, n + 1);
                     
@@ -207,4 +201,12 @@ public class Problem implements Solver {
         return StringRepresentation;
     }
     
+    public String getSiplifyNotation() {
+        StringBuilder sb = new StringBuilder();
+        for (Segment item : Simplify()) {
+            sb.append(item.getExactRepresentation());
+            sb.append(' ');
+        }
+        return sb.toString();
+    }
 }
