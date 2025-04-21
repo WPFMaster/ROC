@@ -73,7 +73,7 @@ public class Problem implements Solver {
                     
                     //Need to solve minus after pranthesies and in the beginning of expression
                     if (i.get() == 0 || Segments.get(i.get() - 1) == "(") {
-                        
+                        lowPriority.add((list) -> list.push(- list.pop()));
                     } else lowPriority.add((list) -> list.push(- list.pop() + list.pop()));
                     
                     

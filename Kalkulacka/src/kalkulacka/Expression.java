@@ -29,7 +29,8 @@ public class Expression {
         }
         else {
             //Equation to solve
-            solve = new Equation(new String[][] {Parser(sides[0]), Parser(sides[1])}, input);
+            solve = null;
+            //Uncomment****solve = new Equation(new List<String>[] {Parser(sides[0]), Parser(sides[1])}, input);
         }
     }
     
