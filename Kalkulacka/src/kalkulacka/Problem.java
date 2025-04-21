@@ -46,7 +46,7 @@ public class Problem implements Solver {
     private boolean recursiveSimplification(List<Segment> oup, AtomicInteger i, int n) {
         //AtomicInteger used to referece int value  and make it faster and thread-safe :)
         if (n >= 10) {
-            System.out.println("Rovnice je příliš vnořená!!! 01");
+            System.out.println("Příklad je příliš vnořen!!! 01");
             return false;
         }
         //if (Segments[i.get()].charAt(0) == '-') oup.add(new SegmentNumber(0));
@@ -144,21 +144,21 @@ public class Problem implements Solver {
                     oup.addAll(lowPriority);
                     
                     return true;
-                case "."://   - length is grader than 1 and can by handled by parseRest
-                case ","://   - The same applies
-                    if (Segments.get(i.get()).length() > 1) {
-                        oup.add(new SegmentNumber(parseRest(item)));
-                        numberOfElements++;
-                    } else {
-                        System.out.println("Chyba při zadávání rovnice!!! 02.1");
-                    }
-                    
-                    oup.addAll(negation);
-                    negation.clear();
-                    break;
+//                case "."://   - length is grader than 1 and can by handled by parseRest
+//                case ","://   - The same applies
+//                    if (Segments.get(i.get()).length() > 1) {
+//                        oup.add(new SegmentNumber(parseRest(item)));
+//                        numberOfElements++;
+//                    } else {
+//                        System.out.println("Chyba při zadávání rovnice!!! 02.1");
+//                    }
+//                    
+//                    oup.addAll(negation);
+//                    negation.clear();
+//                    break;
                     
                 default:
-                    if (Character.isDigit(item.charAt(0))) {
+                    if (Character.isDigit(item.charAt(0)) || item.charAt(0) == '.' || item.charAt(0) == ',') {
                         oup.add(new SegmentNumber(parseRest(item)));
                         numberOfElements++;
                         

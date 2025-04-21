@@ -19,7 +19,7 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Expression ex = new Expression("(-1/2 + 3/8 + 1/4-3/2) / 2");
+        Expression ex = new Expression(".3-.09^.5");
         System.out.println(ex.solve.getExpression());
         System.out.println(ex.solve.solve());
         List<Integer> list = new ArrayList();
