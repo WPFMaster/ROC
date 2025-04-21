@@ -110,8 +110,11 @@ public class Problem implements Solver {
                     oup.addAll(midPriority);
                     midPriority.clear();
                     
-                    //Not conventional. Need FIX!!!
-                    midPriority.add((list) -> list.push(1 / list.pop() * list.pop()));
+                    
+                    midPriority.add((list) -> {
+                        Double e = list.pop();
+                        list.push(list.pop() / e);
+            });
                     break;
                 case "^":
                     oup.addAll(highPriority);
