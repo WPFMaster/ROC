@@ -43,6 +43,7 @@ public class Expression {
                 segmentsNoNull.add(segment);
             }
         }
+        System.out.println(segmentsNoNull);
         return segmentsNoNull;
     }
 }

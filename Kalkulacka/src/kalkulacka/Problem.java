@@ -51,6 +51,8 @@ public class Problem implements Solver {
         }
         //if (Segments[i.get()].charAt(0) == '-') oup.add(new SegmentNumber(0));
         
+        List<Segment> negation = new ArrayList();
+        
         List<Segment> lowPriority = new ArrayList();    //+ -
         List<Segment> midPriority = new ArrayList();    //* /
         List<Segment> highPriority = new ArrayList();   //^
@@ -72,8 +74,8 @@ public class Problem implements Solver {
                     lowPriority.clear();
                     
                     //Need to solve minus after pranthesies and in the beginning of expression
-                    if (i.get() == 0 || Segments.get(i.get() - 1) == "(") {
-                        lowPriority.add((list) -> list.push(- list.pop()));
+                    if (i.get() == 0 || "(".equals(Segments.get(i.get() - 1))) {
+                        negation.add((list) -> list.push(- list.pop()));
                     } else lowPriority.add((list) -> list.push(- list.pop() + list.pop()));
                     
                     
@@ -132,6 +134,9 @@ public class Problem implements Solver {
                     oup.addAll(lowPriority);
                     lowPriority.clear();
                     
+                    oup.addAll(negation);
+                    negation.clear();
+                    
                     break;
                 case ")":                    
                     oup.addAll(highPriority);
@@ -147,12 +152,18 @@ public class Problem implements Solver {
                     } else {
                         System.out.println("Chyba při zadávání rovnice!!! 02.1");
                     }
+                    
+                    oup.addAll(negation);
+                    negation.clear();
                     break;
                     
                 default:
                     if (Character.isDigit(item.charAt(0))) {
                         oup.add(new SegmentNumber(parseRest(item)));
                         numberOfElements++;
+                        
+                        oup.addAll(negation);
+                        negation.clear();
                     } else {
                         System.out.println("Chyba při zadávání příkladu!!! 03");
                         return false;

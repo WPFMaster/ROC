@@ -20,7 +20,7 @@ public class SegmentNumber implements Segment {
     
     @Override
     public void run(Deque<Double> list) {
-        list.add(a);
+        list.push(a);
     }
 
     @Override
