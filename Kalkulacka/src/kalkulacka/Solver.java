@@ -14,7 +14,7 @@ public interface Solver {
     //Returns String representation of Expression
     //Same as toString() method
     public String getExpression();
-
+        
     @Override
     public String toString();
     
