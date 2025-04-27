@@ -59,11 +59,14 @@ public class Problem implements Solver {
         
         //Every operation adds to it's own priority level and pushes other higher priority operations
         
+        int distanceFromNumber = 0xFF;
+        
         for (; i.get() < Segments.size(); i.getAndIncrement()) {
             String item = Segments.get(i.get());
             if (item.length() == 0) {
                 continue;
             }
+            distanceFromNumber++;
             switch (item) {
                 case "-":
                     oup.addAll(highPriority);
@@ -120,6 +123,9 @@ public class Problem implements Solver {
                     highPriority.add(new SegmentPower());
                     break;
                 case "(": //Need to solve when there is number before braclet
+                    if (distanceFromNumber == 1) {
+                        midPriority.add(new SegmentMultiply());
+                    }
                     i.incrementAndGet();
                     recursiveSimplification(oup, i, n + 1);
                     
@@ -158,6 +164,7 @@ public class Problem implements Solver {
                     if (Character.isDigit(item.charAt(0)) || item.charAt(0) == '.' || item.charAt(0) == ',') {
                         oup.add(new SegmentNumber(parseRest(item)));
                         numberOfElements++;
+                        distanceFromNumber = 0;
                         
                         oup.addAll(negation);
                         negation.clear();
