@@ -5,6 +5,10 @@ namespace OK_22_2
 {
     internal class Program
     {
+		/*
+		This program si my erlier version of calculator. From this attempt I begun thinking about doing whole calculator for my year project.
+		It's bearly woriking verion, but it has two ways of implementing calc solve. By going char by char. Or parse and then compute.
+		*/
 		static void rek(ref int i, List<string> oup, string input)
 		{
 			List<char> lovOper = new List<char>();
