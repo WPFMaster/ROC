@@ -34,6 +34,10 @@ public class Expression {
         }
     }
     
+    public double solve() {
+        return solve.solve();
+    }
+    
     public static List<String> Parser(String input) {
         String suportedOperations = "\\+\\-*/^()";
         String[] segments = input.split("(?=[" + suportedOperations + "])|(?<=[" + suportedOperations + "])");  //Uses positive lookahead to keep spliting characters
