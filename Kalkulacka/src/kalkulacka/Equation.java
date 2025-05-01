@@ -5,7 +5,9 @@
  */
 package kalkulacka;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -13,18 +15,37 @@ import java.util.List;
  */
 public class Equation implements Solver {
     private final String StringRepresentation;
-    //Seghmets[0] = Right Side of Equation
-    //Segments[1] = Left side of Equation
     private final List<String>[] Segments;
+    public Map<Character, Double> database = new CharMap();
 
     public Equation(List<String>[] seg, String StrRepre) {
         StringRepresentation = StrRepre;
         Segments = seg;
     }
+    public Equation(List<String> segL, List<String> segR, String StrRepre) {
+        StringRepresentation = StrRepre;
+        Segments = new List[] {segL, segR};
+    }
 
     @Override
     public double solve() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    private void simplification() {
+        List<Double> unknownPart = new LinkedList<>(); //More effective when olny adding elements
+        List<Double> knownPart = new LinkedList<>();
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < Segments[i].size(); j++) {
+                switch () {
+                    case val:
+                        
+                        break;
+                    default:
+                        throw new AssertionError();
+                }
+            }
+        }
     }
 
     @Override

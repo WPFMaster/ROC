@@ -19,10 +19,11 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Expression ex = new Expression(".3-.09^.5");
+        Expression ex = Expression.createExpression(".3-.09^.5");
         System.out.println(((Problem)ex.solve).getSiplifyNotation());
         System.out.println(ex.solve.getExpression());
         System.out.println(ex.solve.solve());
+        System.out.println('z' - 'a');
     }
     public static void ahoj(Integer a) {
         a++;
