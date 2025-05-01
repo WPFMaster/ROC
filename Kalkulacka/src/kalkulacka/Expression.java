@@ -37,7 +37,7 @@ public class Expression {
             //Equation to solve
             isEquation = true;
             isProblem = false;
-            solve = new Equation(Parser(sides[0], "\\+\\-a-zA-Z"), Parser(sides[0], "\\+\\-a-zA-Z"), input);
+            solve = new Equation(Parser(sides[0], "\\+\\-a-zA-Z"), Parser(sides[1], "\\+\\-a-zA-Z"), input);
             //Uncomment****solve = new Equation(new List<String>[] {Parser(sides[0]), Parser(sides[1])}, input);
         }
     }
@@ -46,6 +46,11 @@ public class Expression {
         if (isEquation && from.isEquation) {
             ((Equation)solve).database = ((Equation)from.solve).database;
         }
+    }
+    private Expression() {
+        solve = null;
+        isProblem = false;
+        isEquation = false;
     }
     
     public double solve() {
@@ -77,5 +82,8 @@ public class Expression {
     }
     public static Expression createExpression(String input) {
         return new Expression(input);
+    }
+    public static Expression createExpression() {
+        return new Expression();
     }
 }

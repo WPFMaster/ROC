@@ -29,25 +29,100 @@ public class Equation implements Solver {
 
     @Override
     public double solve() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<Double> unknownPart = new LinkedList<>(); //LinkedList is more effective when olny adding elements
+        List<Double> knownPart = new LinkedList<>();
+        char unknownChar;
+        if (Segments[0].size() == 1) {
+            if ('A' <= Segments[0].get(0).charAt(0) && Segments[0].get(0).charAt(0) <= 'z') {
+                unknownChar = simplification(unknownPart, knownPart, Segments[0].get(0).charAt(0));
+            } else 
+                unknownChar = simplification(unknownPart, knownPart);
+        } else 
+            unknownChar = simplification(unknownPart, knownPart);
+        double knownSum = 0;
+        for (Double aDouble : knownPart) {
+            knownSum += aDouble;
+        }
+        double unknownSum = 0;
+        for (Double aDouble : unknownPart) {
+            unknownSum += aDouble;
+        }
+        if (unknownChar == 0 || unknownSum == 0) {
+            if (knownSum == 0) {
+                return Double.POSITIVE_INFINITY;
+            } else return Double.NEGATIVE_INFINITY;
+        }
+        double unknown = - knownSum / unknownSum;
+        database.put(unknownChar, unknown);
+        return unknown;
     }
     
-    private void simplification() {
-        List<Double> unknownPart = new LinkedList<>(); //More effective when olny adding elements
-        List<Double> knownPart = new LinkedList<>();
+    private char simplification(List<Double> unknownPart, List<Double> knownPart, char unknownChar) {
         for (int i = 0; i < 2; i++) {
+            int sideSign = i == 0 ? 1 : -1;
+            int operSign = 1;
+            double value = 1;
+            boolean containsUknownPart = false;
             for (int j = 0; j < Segments[i].size(); j++) {
-                switch () {
-                    case val:
-                        
+                switch (Segments[i].get(j)) {
+                    case "-":
+                        if (j != 0) {
+                            if (containsUknownPart) {
+                                unknownPart.add(value * sideSign * operSign);
+                            } else {
+                                knownPart.add(value * sideSign * operSign);
+                            }
+                        }
+                        operSign = -1;
+                        value = 1;
+                        containsUknownPart = false;
+                        break;
+                    case "+":
+                        if (j != 0) {
+                            if (containsUknownPart) {
+                                unknownPart.add(value * sideSign * operSign);
+                            } else {
+                                knownPart.add(value * sideSign * operSign);
+                            }
+                        }
+                        operSign = 1;
+                        value = 1;
+                        containsUknownPart = false;
                         break;
                     default:
-                        throw new AssertionError();
+                        try { 
+                            value *= Double.parseDouble(Segments[i].get(j));
+                            System.out.println(Double.parseDouble(Segments[i].get(j)));
+                        } catch (NumberFormatException e) {
+                            //Is letter
+                            if (database.containsKey(Segments[i].get(j).charAt(0))) {
+                                value *= database.get(Segments[i].get(j).charAt(0));
+                            } else {
+                                if (Segments[i].get(j).charAt(0) == unknownChar) {
+                                    containsUknownPart = true;
+                                } else if (unknownChar != 0) {
+                                    System.out.println("Více neznámích!!!");
+                                    return 0;
+                                } else {
+                                    unknownChar = Segments[i].get(j).charAt(0);
+                                    containsUknownPart = true;
+                                }
+                            }
+                        }
                 }
             }
+            if (containsUknownPart) {
+                unknownPart.add(value * sideSign * operSign);
+            } else {
+                knownPart.add(value * sideSign * operSign);
+            }
         }
+        return unknownChar;
     }
-
+    private char simplification(List<Double> unknownPart, List<Double> knownPart) {
+        return simplification(unknownPart, knownPart, (char) 0);
+    }
+    
     @Override
     public String getExpression() {
         return StringRepresentation;
