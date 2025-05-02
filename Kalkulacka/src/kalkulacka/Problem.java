@@ -51,7 +51,7 @@ public class Problem implements Solver {
         }
         //if (Segments[i.get()].charAt(0) == '-') oup.add(new SegmentNumber(0));
         
-        List<Segment> negation = new ArrayList();
+        List<Segment> function = new ArrayList();
         
         List<Segment> lowPriority = new ArrayList();    //+ -
         List<Segment> midPriority = new ArrayList();    //* /
@@ -76,9 +76,12 @@ public class Problem implements Solver {
                     oup.addAll(lowPriority);
                     lowPriority.clear();
                     
+                    oup.addAll(function);
+                    function.clear();
+                    
                     //Need to solve minus after pranthesies and in the beginning of expression
-                    if (i.get() == 0 || "(".equals(Segments.get(i.get() - 1))) {
-                        negation.add(new SegmentNegation());
+                    if (i.get() == 0 || "(".equals(Segments.get(i.get() - 1)) || "*".equals(Segments.get(i.get() - 1)) || "/".equals(Segments.get(i.get() - 1))) {
+                        function.add(new SegmentNegation());
                     } else lowPriority.add(new SegmentSubtract());
                     
                     
@@ -97,6 +100,9 @@ public class Problem implements Solver {
                     oup.addAll(lowPriority);
                     lowPriority.clear();
                     
+                    oup.addAll(function);
+                    function.clear();
+                    
                     lowPriority.add(new SegmentAdd());
                     break;
                 case "*":
@@ -104,6 +110,9 @@ public class Problem implements Solver {
                     highPriority.clear();
                     oup.addAll(midPriority);
                     midPriority.clear();
+                    
+                    oup.addAll(function);
+                    function.clear();
                     
                     midPriority.add(new SegmentMultiply());
                     break;
@@ -113,6 +122,8 @@ public class Problem implements Solver {
                     oup.addAll(midPriority);
                     midPriority.clear();
                     
+                    oup.addAll(function);
+                    function.clear();
                     
                     midPriority.add(new SegmentDivide());
                     break;
@@ -123,6 +134,9 @@ public class Problem implements Solver {
                     highPriority.add(new SegmentPower());
                     break;
                 case "(": //Need to solve when there is number before braclet
+                case "{":
+                case "[":
+                case "<":
                     if (distanceFromNumber == 1) {
                         midPriority.add(new SegmentMultiply());
                     }
@@ -137,28 +151,48 @@ public class Problem implements Solver {
                     oup.addAll(lowPriority);
                     lowPriority.clear();
                     
-                    oup.addAll(negation);
-                    negation.clear();
+                    oup.addAll(function);
+                    function.clear();
                     
                     break;
-                case ")":                    
+                case ")":  
+                case "}":
+                case "]":
+                case ">":                  
                     oup.addAll(highPriority);
                     oup.addAll(midPriority);
                     oup.addAll(lowPriority);
                     
                     return true;
-//                case "."://   - length is grader than 1 and can by handled by parseRest
-//                case ","://   - The same applies
-//                    if (Segments.get(i.get()).length() > 1) {
-//                        oup.add(new SegmentNumber(parseRest(item)));
-//                        numberOfElements++;
-//                    } else {
-//                        System.out.println("Chyba při zadávání rovnice!!! 02.1");
-//                    }
-//                    
-//                    oup.addAll(negation);
-//                    negation.clear();
-//                    break;
+                case "sin":
+                case "s":
+                    oup.addAll(highPriority);
+                    highPriority.clear();
+                    oup.addAll(midPriority);
+                    midPriority.clear();
+                    oup.addAll(lowPriority);
+                    lowPriority.clear();
+                    
+                    oup.addAll(function);
+                    function.clear();
+                    
+                    function.add(new SegmentSin());
+                    break;
+                    
+                case "cos":
+                case "c":
+                    oup.addAll(highPriority);
+                    highPriority.clear();
+                    oup.addAll(midPriority);
+                    midPriority.clear();
+                    oup.addAll(lowPriority);
+                    lowPriority.clear();
+                    
+                    oup.addAll(function);
+                    function.clear();
+                    
+                    function.add(new SegmentCos());
+                    break;
                     
                 default:
                     if (Character.isDigit(item.charAt(0)) || item.charAt(0) == '.' || item.charAt(0) == ',') {
@@ -166,8 +200,8 @@ public class Problem implements Solver {
                         numberOfElements++;
                         distanceFromNumber = 0;
                         
-                        oup.addAll(negation);
-                        negation.clear();
+                        oup.addAll(function);
+                        function.clear();
                     } else {
                         System.out.println("Chyba při zadávání příkladu!!! 03");
                         return false;
