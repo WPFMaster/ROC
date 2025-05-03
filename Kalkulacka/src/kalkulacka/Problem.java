@@ -69,15 +69,15 @@ public class Problem implements Solver {
             distanceFromNumber++;
             switch (item) {
                 case "-":
+                    oup.addAll(function);
+                    function.clear();
+                    
                     oup.addAll(highPriority);
                     highPriority.clear();
                     oup.addAll(midPriority);
                     midPriority.clear();
                     oup.addAll(lowPriority);
                     lowPriority.clear();
-                    
-                    oup.addAll(function);
-                    function.clear();
                     
                     //Need to solve minus after pranthesies and in the beginning of expression
                     if (i.get() == 0 || "(".equals(Segments.get(i.get() - 1)) || "*".equals(Segments.get(i.get() - 1)) || "/".equals(Segments.get(i.get() - 1))) {
@@ -93,6 +93,9 @@ public class Problem implements Solver {
 //                    } else lowPriority.add((list) -> list.push(- list.pop() + list.pop()));
                     break;
                 case "+":
+                    oup.addAll(function);
+                    function.clear();
+                    
                     oup.addAll(highPriority);
                     highPriority.clear();
                     oup.addAll(midPriority);
@@ -100,30 +103,27 @@ public class Problem implements Solver {
                     oup.addAll(lowPriority);
                     lowPriority.clear();
                     
-                    oup.addAll(function);
-                    function.clear();
-                    
                     lowPriority.add(new SegmentAdd());
                     break;
                 case "*":
+                    oup.addAll(function);
+                    function.clear();
+                    
                     oup.addAll(highPriority);
                     highPriority.clear();
                     oup.addAll(midPriority);
                     midPriority.clear();
-                    
-                    oup.addAll(function);
-                    function.clear();
                     
                     midPriority.add(new SegmentMultiply());
                     break;
                 case "/":
+                    oup.addAll(function);
+                    function.clear();
+                    
                     oup.addAll(highPriority);
                     highPriority.clear();
                     oup.addAll(midPriority);
                     midPriority.clear();
-                    
-                    oup.addAll(function);
-                    function.clear();
                     
                     midPriority.add(new SegmentDivide());
                     break;
@@ -168,13 +168,14 @@ public class Problem implements Solver {
                 case "s":
                     oup.addAll(highPriority);
                     highPriority.clear();
+                    
+                    oup.addAll(function);
+                    function.clear();
+                    
                     oup.addAll(midPriority);
                     midPriority.clear();
                     oup.addAll(lowPriority);
                     lowPriority.clear();
-                    
-                    oup.addAll(function);
-                    function.clear();
                     
                     function.add(new SegmentSin());
                     break;
