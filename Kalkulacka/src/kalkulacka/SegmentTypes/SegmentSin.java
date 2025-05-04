@@ -19,6 +19,11 @@ public class SegmentSin implements Segment {
     }
 
     @Override
+    public int getPriority() {
+        return 3;
+    }
+
+    @Override
     public String getExactRepresentation() {
         return "sin";
     }

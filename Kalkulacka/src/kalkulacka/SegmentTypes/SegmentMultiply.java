@@ -19,6 +19,11 @@ public class SegmentMultiply implements Segment {
     }
 
     @Override
+    public int getPriority() {
+        return 2;
+    }
+
+    @Override
     public String getExactRepresentation() {
         return "*";
     }

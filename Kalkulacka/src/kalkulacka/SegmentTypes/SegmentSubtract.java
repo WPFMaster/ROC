@@ -9,13 +9,18 @@ import kalkulacka.Segment;
 
 /**
  *
- * @author Admin
+ * @author dominik.dembinny.s
  */
 public class SegmentSubtract implements Segment {
 
     @Override
     public void run(Deque<Double> list) {
         list.push(- list.pop() + list.pop());
+    }
+
+    @Override
+    public int getPriority() {
+        return 1;
     }
 
     @Override

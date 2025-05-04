@@ -13,6 +13,8 @@ import java.util.Stack;
  */
 public interface Segment {
     public void run(Deque<Double> list);
+    
+    public int getPriority();
 
     public String getExactRepresentation();
 

@@ -11,25 +11,20 @@ import kalkulacka.Segment;
  *
  * @author dominik.dembinny.s
  */
-public class SegmentAdd implements Segment {
+public class SegmentBracket implements Segment {
 
     @Override
     public void run(Deque<Double> list) {
-        list.push(list.pop() + list.pop());
+        throw new UnsupportedOperationException("Can't be ran.");
     }
 
     @Override
     public int getPriority() {
-        return 1;
+        return 5;
     }
 
     @Override
     public String getExactRepresentation() {
-        return "+";
-    }
-    
-    @Override
-    public String toString() {
-        return "SegmentAdd";
+        return "(";
     }
 }

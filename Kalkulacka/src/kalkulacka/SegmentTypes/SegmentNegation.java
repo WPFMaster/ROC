@@ -9,13 +9,18 @@ import kalkulacka.Segment;
 
 /**
  *
- * @author Admin
+ * @author dominik.dembinny.s
  */
 public class SegmentNegation implements Segment {
 
     @Override
     public void run(Deque<Double> list) {
         list.add(- list.pop());
+    }
+
+    @Override
+    public int getPriority() {
+        return 3;
     }
 
     @Override

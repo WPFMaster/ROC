@@ -25,6 +25,11 @@ public class SegmentNumber implements Segment {
     }
 
     @Override
+    public int getPriority() {
+        throw new UnsupportedOperationException("Can't by prioritazed."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
     public String getExactRepresentation() {
         return String.valueOf(a);
     }

@@ -9,7 +9,7 @@ import kalkulacka.Segment;
 
 /**
  *
- * @author Admin
+ * @author dominik.dembinny.s
  */
 public class SegmentPower implements Segment {
 
@@ -17,6 +17,11 @@ public class SegmentPower implements Segment {
     public void run(Deque<Double> list) {
         double e = list.pop();
         list.push(Math.pow(list.pop(), e));
+    }
+
+    @Override
+    public int getPriority() {
+        return 4;
     }
 
     @Override
