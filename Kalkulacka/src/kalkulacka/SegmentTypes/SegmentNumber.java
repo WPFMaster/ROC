@@ -7,12 +7,13 @@ package kalkulacka.SegmentTypes;
 import java.util.Deque;
 import java.util.Stack;
 import kalkulacka.Segment;
+import kalkulacka.SegmentFunction;
 
 /**
  *
  * @author dominik.dembinny.s
  */
-public class SegmentNumber implements Segment {
+public class SegmentNumber implements SegmentFunction {
     private final double a;
 
     public SegmentNumber(double a) {
@@ -26,7 +27,7 @@ public class SegmentNumber implements Segment {
 
     @Override
     public int getPriority() {
-        throw new UnsupportedOperationException("Can't by prioritazed."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return 0;
     }
 
     @Override

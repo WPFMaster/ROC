@@ -6,19 +6,14 @@ package kalkulacka.SegmentTypes;
 
 import java.util.Deque;
 import kalkulacka.Segment;
+import kalkulacka.SegmentItem;
 
 /**
  *
  * @author dominik.dembinny.s
  */
-public class SegmentBracket implements Segment {
+public class SegmentBracket implements SegmentItem {
 
-    @Override
-    public void run(Deque<Double> list) {
-        throw new UnsupportedOperationException("Can't be ran.");
-    }
-
-    @Override
     public int getPriority() {
         return 5;
     }

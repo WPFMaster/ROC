@@ -27,18 +27,18 @@ public class Problem implements Solver {
 
     @Override
     public double solve() {
-        List<Segment> arr = Simplify();
+        List<SegmentFunction> arr = Simplify();
         Deque<Double> oup = new LinkedList<>();
-        for (Segment a : arr) {
+        for (SegmentFunction a : arr) {
             a.run(oup);
         }
         return oup.pop();
     }
     
-    private List<Segment> Simplify() {
-        List<Segment> oup = new ArrayList();
+    private List<SegmentFunction> Simplify() {
+        List<SegmentFunction> oup = new ArrayList();
         
-        Deque<Segment> stack = new LinkedList<>();
+        Deque<SegmentItem> stack = new LinkedList<>();
         
         int distanceFromNumber = 0xFF;
         
@@ -52,7 +52,7 @@ public class Problem implements Solver {
             
             distanceFromNumber++;
             
-            Segment addItem;
+            SegmentFunction addItem;
             switch (item) {
                 case "-":
                     //Need to solve minus after pranthesies and in the beginning of expression
@@ -103,9 +103,7 @@ public class Problem implements Solver {
                         stack.push(addItem);
                     }
                     
-                    addItem = new SegmentBracket();
-                    
-                    stack.push(addItem);
+                    stack.push(new SegmentBracket());
                     
 //                    oup.addAll(highPriority);
 //                    highPriority.clear();
@@ -122,9 +120,7 @@ public class Problem implements Solver {
                 case "}":
                 case "]":
                 case ">":
-                    addItem = new SegmentBracket();
-                    
-                    flush(oup, addItem, stack);
+                    flush(oup, new SegmentBracket(), stack);
                     break;
                 case "sin":
                 case "s":
@@ -172,20 +168,42 @@ public class Problem implements Solver {
         }
     }
     
-    private void flush(List<Segment> oup, Segment e, Deque<Segment> stack) {
-        int priority = e.getPriority();
+    private void flush(List<SegmentFunction> oup, Segment e, Deque<? extends SegmentItem> stack) {
         
         if (e instanceof SegmentBracket) {
             while (!stack.isEmpty() && !(stack.peek() instanceof SegmentBracket)) {
-                oup.add(stack.pop());
+                oup.add(((SegmentFunction) stack.pop()));
             }
-        }
-        
-        //+ - 1; * / 2; (-) sin cos 3; ^ 4; ( ) 5
-        while (!stack.isEmpty()) {
-            if (stack.peek().getPriority() >= priority) {
-                oup.add(stack.pop());
-            } else break;
+        } else
+        if (e instanceof SegmentEnd) {
+            for (SegmentItem segmentItem : stack) {
+                if (segmentItem instanceof SegmentFunction) {
+                    oup.add((SegmentFunction) segmentItem);
+                }
+            }
+        } else
+        if (e instanceof SegmentOperator) {
+            //+ - 1; * / 2; (-) sin cos 3; ^ 4; ( ) 5
+            while (!stack.isEmpty()) {
+                if (stack.peek() instanceof SegmentBracket) {
+                    break;
+                } else if (stack.peek() instanceof SegmentOperator && e instanceof SegmentOperator) {
+                    if (!(((SegmentOperator) stack.peek()).isLeftAssociative() && ((SegmentOperator) e).isLeftAssociative())) {
+                        if (((SegmentFunction) stack.peek()).getPriority() > ((SegmentOperator) e).getPriority()) {
+                            oup.add((SegmentFunction) stack.pop());
+                        } else break;
+                        continue;
+                    }
+                    if (((SegmentFunction) stack.peek()).getPriority() >= ((SegmentOperator) e).getPriority()) {
+                        oup.add((SegmentFunction) stack.pop());
+                    } else break;
+                } else
+                if (stack.peek() instanceof SegmentFunction) {
+                    if (((SegmentFunction) stack.peek()).getPriority() >= ((SegmentOperator) e).getPriority()) {
+                        oup.add((SegmentFunction) stack.pop());
+                    } else break;
+                }
+            }
         }
     }
 

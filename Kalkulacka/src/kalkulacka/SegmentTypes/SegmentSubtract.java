@@ -6,12 +6,13 @@ package kalkulacka.SegmentTypes;
 
 import java.util.Deque;
 import kalkulacka.Segment;
+import kalkulacka.SegmentOperator;
 
 /**
  *
  * @author dominik.dembinny.s
  */
-public class SegmentSubtract implements Segment {
+public class SegmentSubtract implements SegmentOperator {
 
     @Override
     public void run(Deque<Double> list) {
@@ -21,6 +22,11 @@ public class SegmentSubtract implements Segment {
     @Override
     public int getPriority() {
         return 1;
+    }
+
+    @Override
+    public boolean isLeftAssociative() {
+        return true;
     }
 
     @Override

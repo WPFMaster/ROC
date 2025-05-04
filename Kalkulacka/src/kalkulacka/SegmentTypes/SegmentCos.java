@@ -6,12 +6,14 @@ package kalkulacka.SegmentTypes;
 
 import java.util.Deque;
 import kalkulacka.Segment;
+import kalkulacka.SegmentFunction;
+import kalkulacka.SegmentOperator;
 
 /**
  *
  * @author dominik.dembinny.s
  */
-public class SegmentCos implements Segment {
+public class SegmentCos implements SegmentFunction {
 
     @Override
     public void run(Deque<Double> list) {
