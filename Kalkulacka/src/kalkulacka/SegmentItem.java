@@ -4,17 +4,10 @@
  */
 package kalkulacka;
 
-import java.util.Deque;
-import java.util.Stack;
-
 /**
  *
  * @author dominik.dembinny.s
  */
-public interface Segment {
-
-    public String getExactRepresentation();
-
-    @Override
-    public String toString();
+public interface SegmentItem extends Segment {
+    
 }

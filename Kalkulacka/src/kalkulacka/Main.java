@@ -5,8 +5,9 @@
  */
 package kalkulacka;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Deque;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 /**
@@ -25,13 +26,13 @@ public class Main {
         while (true) {
             a = a.craeteExpression(sc.nextLine());
             System.out.println(a.solve.solve());
+            System.out.println(((Problem)a.solve).getSiplifyNotation());
             if (false) break;
         }
         Expression ex = Expression.createExpression(".3-.09-.5=x");
-        //System.out.println(((Problem)ex.solve).getSiplifyNotation());
+        System.out.println(((Problem)ex.solve).getSiplifyNotation());
         System.out.println(ex.solve.getExpression());
         System.out.println(ex.solve.solve());
-        System.out.println('z' - 'a');
     }
     public static void ahoj(Integer a) {
         a++;

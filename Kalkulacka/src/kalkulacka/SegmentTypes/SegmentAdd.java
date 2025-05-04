@@ -6,18 +6,29 @@ package kalkulacka.SegmentTypes;
 
 import java.util.Deque;
 import kalkulacka.Segment;
+import kalkulacka.SegmentOperator;
 
 /**
  *
- * @author Admin
+ * @author dominik.dembinny.s
  */
-public class SegmentAdd implements Segment {
+public class SegmentAdd implements SegmentOperator {
 
     @Override
     public void run(Deque<Double> list) {
         list.push(list.pop() + list.pop());
     }
 
+    @Override
+    public int getPriority() {
+        return 1;
+    }
+
+    @Override
+    public boolean isLeftAssociative() {
+        return true;
+    }
+    
     @Override
     public String getExactRepresentation() {
         return "+";

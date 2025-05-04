@@ -6,17 +6,28 @@ package kalkulacka.SegmentTypes;
 
 import java.util.Deque;
 import kalkulacka.Segment;
+import kalkulacka.SegmentOperator;
 
 /**
  *
- * @author Admin
+ * @author dominik.dembinny.s
  */
-public class SegmentDivide implements Segment {
+public class SegmentDivide implements SegmentOperator {
 
     @Override
     public void run(Deque<Double> list) {
         double e = list.pop();
         list.push(list.pop() / e);
+    }
+
+    @Override
+    public int getPriority() {
+        return 2;
+    }
+
+    @Override
+    public boolean isLeftAssociative() {
+        return true;
     }
 
     @Override

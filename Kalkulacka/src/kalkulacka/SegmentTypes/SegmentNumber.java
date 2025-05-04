@@ -7,12 +7,13 @@ package kalkulacka.SegmentTypes;
 import java.util.Deque;
 import java.util.Stack;
 import kalkulacka.Segment;
+import kalkulacka.SegmentFunction;
 
 /**
  *
  * @author dominik.dembinny.s
  */
-public class SegmentNumber implements Segment {
+public class SegmentNumber implements SegmentFunction {
     private final double a;
 
     public SegmentNumber(double a) {
@@ -22,6 +23,11 @@ public class SegmentNumber implements Segment {
     @Override
     public void run(Deque<Double> list) {
         list.push(a);
+    }
+
+    @Override
+    public int getPriority() {
+        return 0;
     }
 
     @Override
