@@ -5,6 +5,7 @@
  */
 package kalkulacka;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -18,13 +19,34 @@ public class Equation implements Solver {
     private final List<String>[] Segments;
     public Map<Character, Double> database = new CharMap();
 
-    public Equation(List<String>[] seg, String StrRepre) {
-        StringRepresentation = StrRepre;
+    /**
+     * 
+     * @param seg
+     * @param strRepre 
+     * @hidden 
+     * @deprecated 
+     */
+    public Equation(List<String>[] seg, String strRepre) {
+        StringRepresentation = strRepre;
         Segments = seg;
     }
-    public Equation(List<String> segL, List<String> segR, String StrRepre) {
-        StringRepresentation = StrRepre;
+    
+    /**
+     * 
+     * @param segL
+     * @param segR
+     * @param strRepre 
+     * @hidden
+     * @deprecated 
+     */
+    public Equation(List<String> segL, List<String> segR, String strRepre) {
+        StringRepresentation = strRepre;
         Segments = new List[] {segL, segR};
+    }
+    
+    public Equation(String strL, String strR, String strRepre) {
+        StringRepresentation = strRepre;
+        Segments = new List[] { Parser(strL), Parser(strR) };
     }
 
     @Override
@@ -121,6 +143,19 @@ public class Equation implements Solver {
     }
     private char simplification(List<Double> unknownPart, List<Double> knownPart) {
         return simplification(unknownPart, knownPart, (char) 0);
+    }
+    
+    public static List<String> Parser(String input) {
+        String suportedOperations = "\\+\\-a-zA-Z";
+        String[] segments = input.split("(?=[" + suportedOperations + "])|(?<=[" + suportedOperations + "])");  //Uses positive lookahead to keep spliting characters
+        List<String> segmentsNoEmpty = new ArrayList(segments.length);
+        for (String segment : segments) {
+            if (segment != "") {
+                segmentsNoEmpty.add(segment);
+            }
+        }
+        System.out.println(segmentsNoEmpty);
+        return segmentsNoEmpty;
     }
     
     @Override

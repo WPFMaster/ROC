@@ -31,14 +31,13 @@ public class Expression {
             //Problem to solve
             isProblem = true;
             isEquation = false;
-            solve = new Problem(Parser(sides[0], "\\+\\-*/^()"), sides[0] + "=");
+            solve = new Problem(sides[0]);
         }
         else {
             //Equation to solve
             isEquation = true;
             isProblem = false;
-            solve = new Equation(Parser(sides[0], "\\+\\-a-zA-Z"), Parser(sides[1], "\\+\\-a-zA-Z"), input);
-            //Uncomment****solve = new Equation(new List<String>[] {Parser(sides[0]), Parser(sides[1])}, input);
+            solve = new Equation(sides[0], sides[1], input);
         }
     }
     private Expression(Expression from, String input) {
@@ -55,22 +54,6 @@ public class Expression {
     
     public double solve() {
         return solve.solve();
-    }
-    
-    public static List<String> Parser(String input, String suportedOperations) {
-        //String suportedOperations = "\\+\\-*/^()";
-        String[] segments = input.split("(?=[" + suportedOperations + "])|(?<=[" + suportedOperations + "])");  //Uses positive lookahead to keep spliting characters
-        List<String> segmentsNoEmpty = new ArrayList(segments.length);
-        for (String segment : segments) {
-            if (segment != "") {
-                segmentsNoEmpty.add(segment);
-            }
-        }
-        System.out.println(segmentsNoEmpty);
-        return segmentsNoEmpty;
-    }
-    public static List<String> Parser(String input) {
-        return Parser(input, "\\+\\-*/^()");
     }
     
     public Expression craeteExpression(String input) {

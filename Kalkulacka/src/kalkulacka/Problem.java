@@ -20,11 +20,36 @@ public class Problem implements Solver {
     private final List<String> Segments;
     private int numberOfElements;
     
+    /**
+     * 
+     * @param seg
+     * @param StrRepre
+     * @hidden 
+     * @deprecated 
+     */
     public Problem(List<String> seg, String StrRepre) {
         StringRepresentation = StrRepre;
         Segments = seg;
     }
 
+    public Problem(String StrRepre) {
+        StringRepresentation = StrRepre;
+        Segments = Parser(StrRepre);
+    }
+    
+    private static List<String> Parser(String input) {
+        String suportedOperations = "\\+\\-*/^()[\\]{}<>]|si?n?|co?s?";
+        String[] segments = input.split("(?=[" + suportedOperations + ")|(?<=[" + suportedOperations + ")");  //Uses positive lookahead to keep spliting characters
+        List<String> segmentsNoEmpty = new ArrayList(segments.length);
+        for (String segment : segments) {
+            if (segment != "") {
+                segmentsNoEmpty.add(segment);
+            }
+        }
+        System.out.println(segmentsNoEmpty);
+        return segmentsNoEmpty;
+    }
+    
     @Override
     public double solve() {
         List<SegmentFunction> arr = Simplify();
@@ -121,7 +146,7 @@ public class Problem implements Solver {
                 case "]":
                 case ">":
                     flush(oup, new SegmentBracket(), stack);
-										distanceFromNumber = 0;
+                    distanceFromNumber = 0;
                     break;
                 case "sin":
                 case "s":
@@ -189,7 +214,7 @@ public class Problem implements Solver {
                 if (stack.peek() instanceof SegmentBracket) {
                     break;
                 } else if (stack.peek() instanceof SegmentOperator && e instanceof SegmentOperator) {
-                    if (!(((SegmentOperator) stack.peek()).isLeftAssociative() && ((SegmentOperator) e).isLeftAssociative())) {
+                    if (!((SegmentOperator) e).isLeftAssociative()) {
                         if (((SegmentFunction) stack.peek()).getPriority() > ((SegmentOperator) e).getPriority()) {
                             oup.add((SegmentFunction) stack.pop());
                         } else break;
