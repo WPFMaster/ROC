@@ -1,9 +1,0 @@
-2*(2)   -> [2, *, (2, )]        -> 2 2 *
-2*(-10-5)   -> [2, *, (, -10, -5, )]    -> 2 -10 -5 + *
-2*(10-5)    -> [2, *, (10, -5, )]       -> 2 10 -5 + *
-//Musíme použít třídu pro ukládání čísel
-//Musí poskytovat vlastnost negativního čísla
-
-//Funkce se bude zkládat ze tří listů pro operace s největší prioritou poté s nizží a nakonci nejnižší
-//poté co narazí na přičtení nebo odečtení naskládá všechny předešlé operace do výstupu
-//Rekurzivně se bude vstupovat do závorek
