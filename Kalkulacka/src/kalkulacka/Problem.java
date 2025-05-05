@@ -121,6 +121,7 @@ public class Problem implements Solver {
                 case "]":
                 case ">":
                     flush(oup, new SegmentBracket(), stack);
+										distanceFromNumber = 0;
                     break;
                 case "sin":
                 case "s":
