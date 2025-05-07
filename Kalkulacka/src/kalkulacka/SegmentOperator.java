@@ -1,12 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package kalkulacka;
 
-import java.util.Deque;
-
 /**
+ * The type of Segment that operates on two numbers. This is important for the associative decision.
  *
  * @author dominik.dembinny.s
  */

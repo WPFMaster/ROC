@@ -18,7 +18,7 @@ public interface Solver {
     public double solve();
     
     /**
-     * Returns full string representatin of expresion. It's the same as {@link #toString()}.
+     * Returns full string representation of expression. It's the same as {@link #toString()}.
      * 
      * @return the string representation of user input
      */

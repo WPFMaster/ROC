@@ -35,7 +35,7 @@ public class Expression {
             //Equation to solve
             isEquation = true;
             isProblem = false;
-            solve = new Equation(sides[0], sides[1], input);
+            solve = new Equation(sides[0], sides[1]);
         }
     }
     private Expression(Expression from, String input) {

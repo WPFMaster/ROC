@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package kalkulacka.SegmentTypes;
 
 import java.util.Deque;
@@ -9,6 +5,7 @@ import kalkulacka.Segment;
 import kalkulacka.SegmentOperator;
 
 /**
+ * Adds two elements algebraically together.
  *
  * @author dominik.dembinny.s
  */
@@ -19,16 +16,28 @@ public class SegmentAdd implements SegmentOperator {
         list.push(list.pop() + list.pop());
     }
 
+    /**
+     * 
+     * @return 1
+     */
     @Override
     public int getPriority() {
         return 1;
     }
 
+    /**
+     * 
+     * @return true
+     */
     @Override
     public boolean isLeftAssociative() {
         return true;
     }
     
+    /**
+     * 
+     * @return '+'
+     */
     @Override
     public String getExactRepresentation() {
         return "+";

@@ -1,10 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package kalkulacka;
 
 /**
+ * The interface to shorten the selection of items.
+ * In this small program it's quite useless, differentiating from just segment.
  *
  * @author dominik.dembinny.s
  */
