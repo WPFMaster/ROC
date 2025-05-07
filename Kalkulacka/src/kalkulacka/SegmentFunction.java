@@ -10,7 +10,7 @@ import java.util.Deque;
  *
  * @author dominik.dembinny.s
  */
-public interface SegmentFunction extends Segment, SegmentItem {
+public interface SegmentFunction extends SegmentItem {
     
     public void run(Deque<Double> list);
     

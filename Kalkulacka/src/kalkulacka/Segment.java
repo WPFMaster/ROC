@@ -1,18 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package kalkulacka;
 
-import java.util.Deque;
-import java.util.Stack;
-
 /**
+ * A part of problem for one element.
  *
  * @author dominik.dembinny.s
  */
 public interface Segment {
 
+    /**
+     * Give the same string representation in infix notation.
+     * 
+     * @return the exact string representation
+     */
     public String getExactRepresentation();
 
     @Override

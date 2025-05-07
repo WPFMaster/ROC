@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package kalkulacka;
 
 import kalkulacka.SegmentTypes.SegmentNumber;
@@ -12,8 +8,10 @@ import java.util.List;
 import kalkulacka.SegmentTypes.*;
 
 /**
+ * Solver for mathematics problems.
  *
  * @author dominik.dembinny.s
+ * @see Solver
  */
 public class Problem implements Solver {
     private final String StringRepresentation;
@@ -24,7 +22,7 @@ public class Problem implements Solver {
      * 
      * @param seg
      * @param StrRepre
-     * @hidden 
+     * @hidden the spliting is handled by this class instead.
      * @deprecated 
      */
     public Problem(List<String> seg, String StrRepre) {
@@ -32,13 +30,24 @@ public class Problem implements Solver {
         Segments = seg;
     }
 
+    /**
+     * Contructor for creating problem.
+     * 
+     * @param StrRepre a tring representation of problem in infix notation.
+     */
     public Problem(String StrRepre) {
         StringRepresentation = StrRepre;
-        Segments = Parser(StrRepre);
+        Segments = Spliter(StrRepre);
     }
     
-    private static List<String> Parser(String input) {
-        String suportedOperations = "\\+\\-*/^()[\\]{}<>]|si?n?|co?s?";
+    /**
+     * The part of program that 
+     * 
+     * @param input
+     * @see String#split(java.lang.String) 
+     */
+    private static List<String> Spliter(String input) {
+        String suportedOperations = "\\+\\-*/^()\\[\\]{}<>]|si?n?|co?s?";
         String[] segments = input.split("(?=[" + suportedOperations + ")|(?<=[" + suportedOperations + ")");  //Uses positive lookahead to keep spliting characters
         List<String> segmentsNoEmpty = new ArrayList(segments.length);
         for (String segment : segments) {
@@ -46,7 +55,6 @@ public class Problem implements Solver {
                 segmentsNoEmpty.add(segment);
             }
         }
-        System.out.println(segmentsNoEmpty);
         return segmentsNoEmpty;
     }
     

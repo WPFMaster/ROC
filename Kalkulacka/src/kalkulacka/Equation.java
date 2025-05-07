@@ -46,7 +46,7 @@ public class Equation implements Solver {
     
     public Equation(String strL, String strR, String strRepre) {
         StringRepresentation = strRepre;
-        Segments = new List[] { Parser(strL), Parser(strR) };
+        Segments = new List[] { Spliter(strL), Spliter(strR) };
     }
 
     @Override
@@ -145,7 +145,7 @@ public class Equation implements Solver {
         return simplification(unknownPart, knownPart, (char) 0);
     }
     
-    public static List<String> Parser(String input) {
+    public static List<String> Spliter(String input) {
         String suportedOperations = "\\+\\-a-zA-Z";
         String[] segments = input.split("(?=[" + suportedOperations + "])|(?<=[" + suportedOperations + "])");  //Uses positive lookahead to keep spliting characters
         List<String> segmentsNoEmpty = new ArrayList(segments.length);

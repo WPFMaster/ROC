@@ -10,7 +10,7 @@ import java.util.Deque;
  *
  * @author dominik.dembinny.s
  */
-public interface SegmentOperator extends Segment, SegmentFunction, SegmentItem {
+public interface SegmentOperator extends SegmentFunction, SegmentItem {
     
     /**
      * When computing with side is associative.
