@@ -32,9 +32,9 @@ public class CharMap implements Map<Character, Double> {
     }
 
     /**
-     * Returns <tt>true</tt> if this map contains no key-value mappings.
+     * Returns true if this map contains no key-value mappings.
      *
-     * @return <tt>true</tt> if this map contains no key-value mappings
+     * @return true if this map contains no key-value mappings
      */
     @Override
     public boolean isEmpty() {
@@ -47,14 +47,14 @@ public class CharMap implements Map<Character, Double> {
     }
 
     /**
-     * Returns <tt>true</tt> if this map contains a mapping for the specified
-     * key.  More formally, returns <tt>true</tt> if and only if
-     * this map contains a mapping for a key <tt>k</tt> such that
-     * <tt>(key==null ? k==null : key.equals(k))</tt>.  (There can be
+     * Returns true if this map contains a mapping for the specified
+     * key.  More formally, returns true if and only if
+     * this map contains a mapping for a key k such that
+     * (key==null ? k==null : key.equals(k)).  (There can be
      * at most one such mapping.)
      *
      * @param key key whose presence in this map is to be tested
-     * @return <tt>true</tt> if this map contains a mapping for the specified
+     * @return true if this map contains a mapping for the specified
      *         key
      */
     @Override
@@ -70,15 +70,15 @@ public class CharMap implements Map<Character, Double> {
     }
 
     /**
-     * Returns <tt>true</tt> if this map maps one or more keys to the
-     * specified value.  More formally, returns <tt>true</tt> if and only if
-     * this map contains at least one mapping to a value <tt>v</tt> such that
-     * <tt>(value==null ? v==null : value.equals(v))</tt>.  This operation
+     * Returns true if this map maps one or more keys to the
+     * specified value.  More formally, returns true if and only if
+     * this map contains at least one mapping to a value v such that
+     * (value==null ? v==null : value.equals(v)).  This operation
      * will probably require time linear in the map size for most
-     * implementations of the <tt>Map</tt> interface.
+     * implementations of the Map interface.
      *
      * @param value value whose presence in this map is to be tested
-     * @return <tt>true</tt> if this map maps one or more keys to the
+     * @return true if this map maps one or more keys to the
      *         specified value
      */
     @Override
@@ -135,17 +135,17 @@ public class CharMap implements Map<Character, Double> {
      * Associates the specified value with the specified key in this map
      * (optional operation).  If the map previously contained a mapping for
      * the key, the old value is replaced by the specified value.  (A map
-     * <tt>m</tt> is said to contain a mapping for a key <tt>k</tt> if and only
+     * m is said to contain a mapping for a key k if and only
      * if {@link #containsKey(Object) m.containsKey(k)} would return
-     * <tt>true</tt>.)
+     * true.)
      *
      * @param key key with which the specified value is to be associated
      * @param value value to be associated with the specified key
-     * @return the previous value associated with <tt>key</tt>, or
-     *         <tt>null</tt> if there was no mapping for <tt>key</tt>.
-     *         (A <tt>null</tt> return can also indicate that the map
-     *         previously associated <tt>null</tt> with <tt>key</tt>,
-     *         if the implementation supports <tt>null</tt> values.)
+     * @return the previous value associated with key, or
+     *         null if there was no mapping for key.
+     *         (A null return can also indicate that the map
+     *         previously associated null with key,
+     *         if the implementation supports null values.)
      */
     @Override
     public Double put(Character key, Double value) {
@@ -162,24 +162,24 @@ public class CharMap implements Map<Character, Double> {
     /**
      * Removes the mapping for a key from this map if it is present
      * (optional operation).   More formally, if this map contains a mapping
-     * from key <tt>k</tt> to value <tt>v</tt> such that
+     * from key k to value v such that
      * <code>(key==null ?  k==null : key.equals(k))</code>, that mapping
      * is removed.  (The map can contain at most one such mapping.)
      *
      * <p>Returns the value to which this map previously associated the key,
-     * or <tt>null</tt> if the map contained no mapping for the key.
+     * or null if the map contained no mapping for the key.
      *
      * <p>If this map permits null values, then a return value of
-     * <tt>null</tt> does not <i>necessarily</i> indicate that the map
+     * null does not <i>necessarily</i> indicate that the map
      * contained no mapping for the key; it's also possible that the map
-     * explicitly mapped the key to <tt>null</tt>.
+     * explicitly mapped the key to null.
      *
      * <p>The map will not contain a mapping for the specified key once the
      * call returns.
      *
      * @param key key whose mapping is to be removed from the map
-     * @return the previous value associated with <tt>key</tt>, or
-     *         <tt>null</tt> if there was no mapping for <tt>key</tt>.
+     * @return the previous value associated with key, or
+     *         null if there was no mapping for key.
      */
     @Override
     public Double remove(Object key) {
@@ -198,7 +198,7 @@ public class CharMap implements Map<Character, Double> {
      * Copies all of the mappings from the specified map to this map
      * (optional operation).  The effect of this call is equivalent to that
      * of calling {@link #put(Object,Object) put(k, v)} on this map once
-     * for each mapping from key <tt>k</tt> to value <tt>v</tt> in the
+     * for each mapping from key k to value v in the
      * specified map.  The behavior of this operation is undefined if the
      * specified map is modified while the operation is in progress.
      *
@@ -225,12 +225,12 @@ public class CharMap implements Map<Character, Double> {
      * The set is backed by the map, so changes to the map are
      * reflected in the set, and vice-versa.  If the map is modified
      * while an iteration over the set is in progress (except through
-     * the iterator's own <tt>remove</tt> operation), the results of
+     * the iterator's own remove operation), the results of
      * the iteration are undefined.  The set supports element removal,
      * which removes the corresponding mapping from the map, via the
-     * <tt>Iterator.remove</tt>, <tt>Set.remove</tt>,
-     * <tt>removeAll</tt>, <tt>retainAll</tt>, and <tt>clear</tt>
-     * operations.  It does not support the <tt>add</tt> or <tt>addAll</tt>
+     * Iterator.remove, Set.remove,
+     * removeAll, retainAll, and clear
+     * operations.  It does not support the add or addAll
      * operations.
      *
      * @return a set view of the keys contained in this map
@@ -251,13 +251,13 @@ public class CharMap implements Map<Character, Double> {
      * The collection is backed by the map, so changes to the map are
      * reflected in the collection, and vice-versa.  If the map is
      * modified while an iteration over the collection is in progress
-     * (except through the iterator's own <tt>remove</tt> operation),
+     * (except through the iterator's own remove operation),
      * the results of the iteration are undefined.  The collection
      * supports element removal, which removes the corresponding
-     * mapping from the map, via the <tt>Iterator.remove</tt>,
-     * <tt>Collection.remove</tt>, <tt>removeAll</tt>,
-     * <tt>retainAll</tt> and <tt>clear</tt> operations.  It does not
-     * support the <tt>add</tt> or <tt>addAll</tt> operations.
+     * mapping from the map, via the Iterator.remove,
+     * Collection.remove, removeAll,
+     * retainAll and clear operations.  It does not
+     * support the add or addAll operations.
      *
      * @return a collection view of the values contained in this map
      */
@@ -277,14 +277,14 @@ public class CharMap implements Map<Character, Double> {
      * The set is backed by the map, so changes to the map are
      * reflected in the set, and vice-versa.  If the map is modified
      * while an iteration over the set is in progress (except through
-     * the iterator's own <tt>remove</tt> operation, or through the
-     * <tt>setValue</tt> operation on a map entry returned by the
+     * the iterator's own remove operation, or through the
+     * setValue operation on a map entry returned by the
      * iterator) the results of the iteration are undefined.  The set
      * supports element removal, which removes the corresponding
-     * mapping from the map, via the <tt>Iterator.remove</tt>,
-     * <tt>Set.remove</tt>, <tt>removeAll</tt>, <tt>retainAll</tt> and
-     * <tt>clear</tt> operations.  It does not support the
-     * <tt>add</tt> or <tt>addAll</tt> operations.
+     * mapping from the map, via the Iterator.remove,
+     * Set.remove, removeAll, retainAll and
+     * clear operations.  It does not support the
+     * add or addAll operations.
      *
      * @return a set view of the mappings contained in this map
      */
