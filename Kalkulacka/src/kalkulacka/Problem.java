@@ -41,9 +41,9 @@ public class Problem implements Solver {
     }
     
     /**
-     * The part of program that 
+     * The part of program that splits intput into tokens.
      * 
-     * @param input
+     * @param input input to by splited
      * @see String#split(java.lang.String) 
      */
     private static List<String> Spliter(String input) {
@@ -68,6 +68,11 @@ public class Problem implements Solver {
         return oup.pop();
     }
     
+    /**
+     * The parser.
+     * 
+     * @return list of functions to evaluate the problem
+     */
     private List<SegmentFunction> Simplify() {
         List<SegmentFunction> oup = new ArrayList();
         
@@ -202,6 +207,13 @@ public class Problem implements Solver {
         }
     }
     
+    /**
+     * Adds functions from list of items to output function list.
+     * 
+     * @param oup   output list 
+     * @param e     the element whitch is adding
+     * @param stack the stack of operators
+     */
     private void flush(List<SegmentFunction> oup, Segment e, Deque<? extends SegmentItem> stack) {
         
         if (e instanceof SegmentBracket) {
@@ -251,6 +263,11 @@ public class Problem implements Solver {
         return StringRepresentation;
     }
     
+    /**
+     * Returns a postfix notation of problem
+     * 
+     * @return string represenation of problem in postfix notation
+     */
     public String getSiplifyNotation() {
         StringBuilder sb = new StringBuilder();
         for (Segment item : Simplify()) {

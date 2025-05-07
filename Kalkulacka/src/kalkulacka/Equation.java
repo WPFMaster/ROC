@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package kalkulacka;
 
 import java.util.ArrayList;
@@ -11,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * Solves the expression of equation.
  *
  * @author dominik.dembinny.s
  */
