@@ -5,14 +5,12 @@
  */
 package kalkulacka;
 
-import java.util.Deque;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.Scanner;
 
 /**
- * https://kisk.phil.muni.cz/kpi/temata/tvorba-a-sdelovani-novych-informaci/tvorba-posteru
+ * Just testing class.
  *
+ * @hidden 
  * @author dominik.dembinny.s
  */
 public class Main {
@@ -26,16 +24,8 @@ public class Main {
         while (true) {
             a = a.craeteExpression(sc.nextLine());
             System.out.println(a.solve.solve());
-            System.out.println(((Problem)a.solve).getSiplifyNotation());
-            if (false) break;
+            if (a.solve instanceof Problem)
+                System.out.println(((Problem)a.solve).getSiplifyNotation());
         }
-        Expression ex = Expression.createExpression(".3-.09-.5=x");
-        System.out.println(((Problem)ex.solve).getSiplifyNotation());
-        System.out.println(ex.solve.getExpression());
-        System.out.println(ex.solve.solve());
     }
-    public static void ahoj(Integer a) {
-        a++;
-    }
-    
 }
