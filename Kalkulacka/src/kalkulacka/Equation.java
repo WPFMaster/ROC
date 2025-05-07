@@ -141,7 +141,6 @@ public class Equation implements Solver {
                         try {
                             Segments[i].set(j, Segments[i].get(j).replace(',', '.')); //To not throw error when comma used
                             value *= Double.parseDouble(Segments[i].get(j));
-                            System.out.println(Double.parseDouble(Segments[i].get(j)));
                         } catch (NumberFormatException e) {
                             //Is letter
                             if (database.containsKey(Segments[i].get(j).charAt(0))) {
@@ -181,7 +180,6 @@ public class Equation implements Solver {
                 segmentsNoEmpty.add(segment);
             }
         }
-        System.out.println(segmentsNoEmpty);
         return segmentsNoEmpty;
     }
     

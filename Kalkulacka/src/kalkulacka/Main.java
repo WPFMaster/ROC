@@ -16,6 +16,7 @@ public class Main {
     public static void main(String[] args) {
         Expression a = Expression.createExpression();
         Scanner sc = new Scanner(System.in);
+        System.out.println("Insert your expression:");
         while (true) {
             a = a.craeteExpression(sc.nextLine());
             System.out.println(a.solve.solve());
